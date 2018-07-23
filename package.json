@@ -1,0 +1,32 @@
+{
+  "name": "busdelayinfo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ok0/busDelayInfo.git"
+  },
+  "author": "Jonghun Yoon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ok0/busDelayInfo/issues"
+  },
+  "homepage": "https://github.com/ok0/busDelayInfo#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "body-parser": "^1.18.3",
+    "charset": "^1.0.1",
+    "date-utils": "^1.2.21",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "iconv": "^2.3.0",
+    "iconv-lite": "^0.4.23",
+    "request": "^2.87.0",
+    "underscore": "^1.9.1",
+    "xml2js": "^0.4.19"
+  }
+}
