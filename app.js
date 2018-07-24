@@ -5,7 +5,9 @@ var bodyParser = require("body-parser");
 
 
 /* router */
-var testRouter = require("./routes/testRouter");
+var callWeather = require("./routes/call/weather");
+var callTraffic = require("./routes/call/traffic");
+var callStation = require("./routes/call/station");
 
 /* other.. */
 var app = express();
@@ -21,8 +23,11 @@ app.use("/modules", express.static('node_modules'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+
 /* routes */
-app.use("/testRouter", testRouter);
+app.use("/call/weather", callWeather);
+app.use("/call/traffic", callTraffic);
+app.use("/call/station", callStation);
 
 
 /* LISTEN */

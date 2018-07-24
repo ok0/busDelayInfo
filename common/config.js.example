@@ -1,0 +1,16 @@
+module.exports = {
+	weather : {
+		key : ""
+		, prevUrl : "http://openapi.seoul.go.kr:8088"
+		, postUrl : "xml/RealtimeWeatherStation"
+	}
+	, traffic : {
+		key : ""
+		, prevUrl : "http://openapi.seoul.go.kr:8088"
+		, postUrl : "xml/VolInfo"
+	}
+	, station : {
+		key : ""
+		, url : "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid"
+	}
+};

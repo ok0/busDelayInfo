@@ -1,3 +1,7 @@
+#other..
+files/
+common/config.js
+
 # Logs
 logs
 *.log
