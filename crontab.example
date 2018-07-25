@@ -1,0 +1,2 @@
+# traffic
+* * * * * curl -XGET localhost:3000/call/station & sleep 30; curl -XGET localhost:3000/call/station

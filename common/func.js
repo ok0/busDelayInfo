@@ -33,7 +33,11 @@ cFunc.getApiData = function(url, callback) {
 }
 
 cFunc.writeXmlToJson = function(dir, filename, body, callback) {
-	var filePath = __dirname+"/../files/" + dir + "/" + filename + ".json";
+	var dirPath = __dirname+"/../files/" + dir;
+	var fileRename = filename + ".json";
+	var filePath = dirPath + "/"+fileRename;
+	
+	cFunc.mkdirPath(dirPath);
 	fs.open(filePath, "w+", function(openError) {
 		if( !openError ) {
 			fs.writeFile(filePath, JSON.stringify(body), "utf-8", function(fsError) {
@@ -49,5 +53,17 @@ cFunc.writeXmlToJson = function(dir, filename, body, callback) {
 		}
 	});
 }
+
+cFunc.mkdirPath = function mkdirpath(dirPath) {
+	if( !fs.existsSync(dirPath) ) {
+		try {
+			fs.mkdirSync(dirPath);
+		} catch(e) {
+			mkdirpath(path.dirname(dirPath));
+			mkdirpath(dirPath);
+		}
+	}
+}
+
 
 module.exports = cFunc;

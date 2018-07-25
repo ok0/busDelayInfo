@@ -38,7 +38,7 @@ router.get("/", function(req, res, next) {
 			console.log(getErr);
 			res.status(500).send();
 		} else {
-			cFunc.writeXmlToJson("station", "station_"+today+"_"+now_time, getRs, function(writeErr, writeRs) {
+			cFunc.writeXmlToJson("station/"+today+"/", "station_"+now_time, getRs, function(writeErr, writeRs) {
 				if( writeErr ) {
 					console.log(writeErr);
 					res.status(500).send();
