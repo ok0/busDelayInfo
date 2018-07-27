@@ -20,13 +20,13 @@ router.get("/", function(req, res, next) {
 	var minutes = now.getMinutes()+"";
 	var seconds = now.getSeconds()+"";
 	
-	if(hours.length == 1){
+	if(hours.length == 1) {
 		hours = "0"+hours;
 	}
-	if(minutes.length == 1){
+	if(minutes.length == 1) {
 		minutes = "0"+minutes;
 	}
-	if(seconds.length == 1){
+	if(seconds.length == 1) {
 		seconds = "0"+seconds;
 	}
 	

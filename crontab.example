@@ -1,2 +1,8 @@
-# traffic. 30초 단위 실행.
+# stations(정류장). 30초 단위 실행.
 * * * * * curl -XGET localhost:3000/call/station & sleep 30; curl -XGET localhost:3000/call/station
+
+# traffic(교통상황). 30분 단위 실행.
+*/30 * * * * curl -XGET localhost:3000/call/traffic
+
+# weather(날씨). 30분 단위 실행.
+*/30 * * * * curl -XGET localhost:3000/call/weather

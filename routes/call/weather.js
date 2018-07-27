@@ -14,7 +14,7 @@ var setArray = function() {
 router.get("/", function(req, res, next) {
 	var today = new Date().toISOString().substr(0, 10).replace('T', ' ');
 	var newDate = new Date();
-	var date = newDate.addHours(-2).toFormat('YYYYMMDD');
+	var date = newDate.addHours(-1).toFormat('YYYYMMDD');
 	var time = newDate.toFormat('HH24');
 	var url = CONFIG.weather.prevUrl + "/" + CONFIG.weather.key + "/" + CONFIG.weather.postUrl + "/1/1000";
 	
