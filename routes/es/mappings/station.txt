@@ -1,0 +1,217 @@
+{
+  "tmp_station": {
+    "mappings": {
+      "doc": {
+        "properties": {
+          "comMsgHeader": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "msgBody": {
+            "properties": {
+              "itemList": {
+                "properties": {
+                  "adirection": {
+                    "type": "keyword"
+                  },
+                  "arrmsg1": {
+                    "type": "text"
+                  },
+                  "arrmsg2": {
+                    "type": "text"
+                  },
+                  "arrmsgSec1": {
+                    "type": "text"
+                  },
+                  "arrmsgSec2": {
+                    "type": "text"
+                  },
+                  "arsId": {
+                    "type": "keyword"
+                  },
+                  "busRouteId": {
+                    "type": "keyword"
+                  },
+                  "busType1": {
+                    "type": "keyword"
+                  },
+                  "busType2": {
+                    "type": "keyword"
+                  },
+                  "firstTm": {
+                    "type": "keyword"
+                  },
+                  "gpsX": {
+                    "type": "float",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "gpsY": {
+                    "type": "float",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "isArrive1": {
+                    "type": "keyword"
+                  },
+                  "isArrive2": {
+                    "type": "keyword"
+                  },
+                  "isFullFlag1": {
+                    "type": "keyword"
+                  },
+                  "isFullFlag2": {
+                    "type": "keyword"
+                  },
+                  "isLast1": {
+                    "type": "keyword"
+                  },
+                  "isLast2": {
+                    "type": "keyword"
+                  },
+                  "lastTm": {
+                    "type": "keyword"
+                  },
+                  "nextBus": {
+                    "type": "keyword"
+                  },
+                  "nxtStn": {
+                    "type": "keyword"
+                  },
+                  "posX": {
+                    "type": "float",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "posY": {
+                    "type": "float",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "rerdieDiv1": {
+                    "type": "text"
+                  },
+                  "rerdieDiv2": {
+                    "type": "text"
+                  },
+                  "rerideNum1": {
+                    "type": "text"
+                  },
+                  "rerideNum2": {
+                    "type": "text"
+                  },
+                  "routeType": {
+                    "type": "keyword"
+                  },
+                  "rtNm": {
+                    "type": "keyword"
+                  },
+                  "sectNm": {
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "sectOrd1": {
+                    "type": "text"
+                  },
+                  "sectOrd2": {
+                    "type": "text"
+                  },
+                  "stId": {
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "stNm": {
+                    "type": "keyword"
+                  },
+                  "staOrd": {
+                    "type": "text",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "stationNm1": {
+                    "type": "text"
+                  },
+                  "stationNm2": {
+                    "type": "text"
+                  },
+                  "stationTp": {
+                    "type": "keyword"
+                  },
+                  "term": {
+                    "type": "integer"
+                  },
+                  "traSpd1": {
+                    "type": "integer"
+                  },
+                  "traSpd2": {
+                    "type": "integer"
+                  },
+                  "traTime1": {
+                    "type": "integer"
+                  },
+                  "traTime2": {
+                    "type": "integer"
+                  },
+                  "vehId1": {
+                    "type": "text"
+                  },
+                  "vehId2": {
+                    "type": "text"
+                  }
+                }
+              }
+            }
+          },
+          "msgHeader": {
+            "properties": {
+              "headerCd": {
+                "type": "keyword"
+              },
+              "headerMsg": {
+                "type": "keyword"
+              },
+              "itemCount": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

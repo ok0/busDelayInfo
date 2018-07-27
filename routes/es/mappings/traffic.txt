@@ -1,0 +1,48 @@
+{
+  "tmp_traffic": {
+    "mappings": {
+      "doc": {
+        "_all": {
+          "enabled": false
+        },
+        "properties": {
+          "RESULT": {
+            "properties": {
+              "CODE": {
+                "type": "keyword"
+              },
+              "MESSAGE": {
+                "type": "keyword"
+              }
+            }
+          },
+          "list_total_count": {
+            "type": "integer"
+          },
+          "row": {
+            "properties": {
+              "hh": {
+                "type": "integer"
+              },
+              "io_type": {
+                "type": "integer"
+              },
+              "lane_num": {
+                "type": "integer"
+              },
+              "spot_num": {
+                "type": "keyword"
+              },
+              "vol": {
+                "type": "integer"
+              },
+              "ymd": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

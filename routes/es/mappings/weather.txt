@@ -1,0 +1,63 @@
+{
+  "tmp_weather": {
+    "mappings": {
+      "doc": {
+        "_all": {
+          "enabled": false
+        },
+        "properties": {
+          "RESULT": {
+            "properties": {
+              "CODE": {
+                "type": "keyword"
+              },
+              "MESSAGE": {
+                "type": "keyword"
+              }
+            }
+          },
+          "list_total_count": {
+            "type": "integer"
+          },
+          "row": {
+            "properties": {
+              "CODE": {
+                "type": "keyword"
+              },
+              "NAME": {
+                "type": "keyword"
+              },
+              "SAWS_HD": {
+                "type": "float"
+              },
+              "SAWS_OBS_TM": {
+                "type": "keyword"
+              },
+              "SAWS_RN_SUM": {
+                "type": "float"
+              },
+              "SAWS_SHINE": {
+                "type": "float"
+              },
+              "SAWS_SOLAR": {
+                "type": "float"
+              },
+              "SAWS_TA_AVG": {
+                "type": "float"
+              },
+              "SAWS_WS_AVG": {
+                "type": "float"
+              },
+              "STN_ID": {
+                "type": "keyword"
+              },
+              "STN_NM": {
+                "type": "keyword"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

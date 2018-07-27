@@ -1,2 +1,2 @@
-# traffic
+# traffic. 30초 단위 실행.
 * * * * * curl -XGET localhost:3000/call/station & sleep 30; curl -XGET localhost:3000/call/station
