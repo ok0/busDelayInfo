@@ -31,9 +31,7 @@ app.use("/call/station", callStation);
 
 
 /* LISTEN */
-app.listen(3000, function() {
-	console.log("Hello, This is App:300!");
-});
+app.listen(3000, function() {});
 
 
 module.exports = app;
