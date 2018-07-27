@@ -1,4 +1,5 @@
 module.exports = {
+	listenPort : 3000,
 	weather : {
 		key : ""
 		, prevUrl : "http://openapi.seoul.go.kr:8088"

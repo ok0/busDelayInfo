@@ -2,6 +2,7 @@
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
+const CONFIG = require("./common/config");
 
 
 /* router */
@@ -31,7 +32,7 @@ app.use("/call/station", callStation);
 
 
 /* LISTEN */
-app.listen(3000, function() {});
+app.listen(CONFIG.listenPort, function() {});
 
 
 module.exports = app;
