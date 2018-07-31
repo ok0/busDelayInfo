@@ -9,6 +9,7 @@ const CONFIG = require("./common/config");
 var callWeather = require("./routes/call/weather");
 var callTraffic = require("./routes/call/traffic");
 var callStation = require("./routes/call/station");
+var callCalendar = require("./routes/call/calendar");
 
 /* other.. */
 var app = express();
@@ -29,10 +30,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use("/call/weather", callWeather);
 app.use("/call/traffic", callTraffic);
 app.use("/call/station", callStation);
+app.use("/call/calendar", callCalendar);
 
 
 /* LISTEN */
-app.listen(CONFIG.listenPort, function() {});
+app.listen(CONFIG.listenPort, function() {
+	console.log("port : " + CONFIG.listenPort);
+});
 
 
 module.exports = app;
