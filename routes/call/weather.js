@@ -6,7 +6,7 @@ const CONFIG = require("../../common/config");
 
 // 1. trim
 // 2. parseInt(), parseFloat()
-var setArray = function() {
+var setArray = function(body) {
 	console.log("weather setArray start");
 	var rowData = body.RealtimeWeatherStation.row ;
 	console.log("weather setArray end");
