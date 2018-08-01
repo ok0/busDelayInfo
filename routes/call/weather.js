@@ -7,7 +7,10 @@ const CONFIG = require("../../common/config");
 // 1. trim
 // 2. parseInt(), parseFloat()
 var setArray = function() {
-	
+	console.log("weather setArray start");
+	var rowData = body.RealtimeWeatherStation.row ;
+	console.log("weather setArray end");
+	return rowData;
 }
 
 // 매일 2시간 단위.
@@ -23,6 +26,7 @@ router.get("/", function(req, res, next) {
 			console.log(getErr);
 			res.status(500).send();
 		} else {
+			console.log(setArray(getRs));
 			cFunc.writeXmlToJson("weather", "weather_"+date+"_"+time, getRs, function(writeErr, writeRs) {
 				if( writeErr ) {
 					console.log(writeErr);
