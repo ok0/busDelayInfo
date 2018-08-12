@@ -3,57 +3,77 @@ var router = express.Router();
 var date_utils  = require('date-utils');
 var cFunc = require("../../common/func");
 const CONFIG = require("../../common/config");
+var request = require("request");
 
 // 1. trim
 // 2. parseInt(), parseFloat()
 var setArray = function(body) {
 	console.log("weather setArray start");
+	var rowDataRESULT = body.RealtimeWeatherStation.RESULT[0] ;
 	var rowData = body.RealtimeWeatherStation.row ;
 	var rowDataArray = new Array();
 	
 	for (var i = 0 ; i < rowData.length ; i++) {
-		var rowData2 = new Object();
-		
-		rowData2.SAWS_OBS_TM = rowData[i].SAWS_OBS_TM;
-		rowData2.STN_NM = rowData[i].STN_NM;
-		rowData2.STN_ID = rowData[i].STN_ID;
+		var rowDataFin = new Object();
+		var rowDataBody = new Object();
+		var rowDataHead = new Object();
+		rowDataHead.CODE = rowDataRESULT.CODE;
+		rowDataHead.MESSAGE = rowDataRESULT.MESSAGE;
+		rowDataBody.SAWS_OBS_TM = rowData[i].SAWS_OBS_TM;
+		rowDataBody.STN_NM = rowData[i].STN_NM;
+		rowDataBody.STN_ID = rowData[i].STN_ID;
 		if(rowData[i].SAWS_TA_AVG =="") {
-			rowData2.SAWS_TA_AVG = parseFloat("0.0");
+			rowDataBody.SAWS_TA_AVG = parseFloat("0.0");
 		} else {
-			rowData2.SAWS_TA_AVG = parseFloat(rowData[i].SAWS_TA_AVG);
+			rowDataBody.SAWS_TA_AVG = parseFloat(rowData[i].SAWS_TA_AVG);
 		}
 		if(rowData[i].SAWS_HD =="") {
-			rowData2.SAWS_HD = parseFloat("0.0");
+			rowDataBody.SAWS_HD = parseFloat("0.0");
 		} else {
-			rowData2.SAWS_HD = parseFloat(rowData[i].SAWS_HD);
+			rowDataBody.SAWS_HD = parseFloat(rowData[i].SAWS_HD);
 		}
-		rowData2.CODE = rowData[i].CODE;
-		rowData2.NAME = rowData[i].NAME;
+		rowDataBody.CODE = rowData[i].CODE;
+		rowDataBody.NAME = rowData[i].NAME;
 		if(rowData[i].SAWS_WS_AVG =="") {
-			rowData2.SAWS_WS_AVG = parseFloat("0.0");
+			rowDataBody.SAWS_WS_AVG = parseFloat("0.0");
 		} else {
-			rowData2.SAWS_WS_AVG = parseFloat(rowData[i].SAWS_WS_AVG);
+			rowDataBody.SAWS_WS_AVG = parseFloat(rowData[i].SAWS_WS_AVG);
 		}
 		if(rowData[i].SAWS_RN_SUM =="") {
-			rowData2.SAWS_RN_SUM = parseFloat("0.0");
+			rowDataBody.SAWS_RN_SUM = parseFloat("0.0");
 		} else {
-			rowData2.SAWS_RN_SUM = parseFloat(rowData[i].SAWS_RN_SUM);
+			rowDataBody.SAWS_RN_SUM = parseFloat(rowData[i].SAWS_RN_SUM);
 		}
 		if(rowData[i].SAWS_SOLAR =="") {
-			rowData2.SAWS_SOLAR = parseFloat("0.0");
+			rowDataBody.SAWS_SOLAR = parseFloat("0.0");
 		} else {
-			rowData2.SAWS_SOLAR = parseFloat(rowData[i].SAWS_SOLAR);
+			rowDataBody.SAWS_SOLAR = parseFloat(rowData[i].SAWS_SOLAR);
 		}
 		if(rowData[i].SAWS_SHINE =="") {
-			rowData2.SAWS_SHINE = parseFloat("0.0");
+			rowDataBody.SAWS_SHINE = parseFloat("0.0");
 		} else {
-			rowData2.SAWS_SHINE = parseFloat(rowData[i].SAWS_SHINE);
+			rowDataBody.SAWS_SHINE = parseFloat(rowData[i].SAWS_SHINE);
 		}
-		rowDataArray.push(rowData2);
+		rowDataArray.push(rowDataBody);
+		rowDataFin.head = rowDataHead;
+		rowDataFin.body = rowDataBody;
+		var url1 = 'http://cloud.rosesystems.kr:9200/tmp_weather/doc/'+rowDataBody.SAWS_OBS_TM+rowDataBody.STN_ID;
+		var OPT = {
+				headers: {
+					"Content-Type": "application/json"
+				}
+				, url : url1
+				, body : JSON.stringify(rowDataFin)
+			};
+		request.put(OPT, function(npErr, npRes, npBody) {
+			console.log(npBody);
+		});
+//		request.post(OPT, function(npErr, npRes, npBody) {
+//			console.log(npBody);
+//		});
 	}
 	
 	var rowData3 = JSON.stringify(rowDataArray);
-//	console.log(rowData3);
 	console.log("weather setArray end");
 	return rowData3;
 }
@@ -71,8 +91,8 @@ router.get("/", function(req, res, next) {
 			console.log(getErr);
 			res.status(500).send();
 		} else {
-//			setArray(getRs);
-			console.log(setArray(getRs));
+			setArray(getRs);
+//			console.log(setArray(getRs));
 			cFunc.writeXmlToJson("weather", "weather_"+date+"_"+time, getRs, function(writeErr, writeRs) {
 				if( writeErr ) {
 					console.log(writeErr);

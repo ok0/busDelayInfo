@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var request = require("request");
 var date_utils  = require('date-utils');
 var cFunc = require("../../common/func");
 const CONFIG = require("../../common/config");
@@ -8,30 +9,49 @@ const CONFIG = require("../../common/config");
 // 2. parseInt(), parseFloat()
 var setArray = function(body) {
 	console.log("traffic setArray start");
+	var rowDataRESULT = body.VolInfo.RESULT[0] ;
 	var rowData = body.VolInfo.row ;
 	var rowDataArray = new Array();
+	
 	for (var i = 0 ; i < rowData.length ; i++) {
-		var rowData2 = new Object();
+		var rowDataFin = new Object();
+		var rowDataBody = new Object();
+		var rowDataHead = new Object();
 		
-		rowData2.spot_num = rowData[i].spot_num;
-		rowData2.ymd = rowData[i].ymd;
+		rowDataHead.CODE = rowDataRESULT.CODE;
+		rowDataHead.MESSAGE = rowDataRESULT.MESSAGE;
+		
+		rowDataBody.spot_num = rowData[i].spot_num;
+		rowDataBody.ymd = rowData[i].ymd;
 		if(rowData[i].hh =="") {
-			rowData2.hh = parseInt("0");
+			rowDataBody.hh = parseInt("0");
 		} else {
-			rowData2.hh = parseInt(rowData[i].hh);
+			rowDataBody.hh = parseInt(rowData[i].hh);
 		}
-		rowData2.io_type = rowData[i].io_type;
+		rowDataBody.io_type = rowData[i].io_type;
 		if(rowData[i].lane_num =="") {
-			rowData2.lane_num = parseInt("0");
+			rowDataBody.lane_num = parseInt("0");
 		} else {
-			rowData2.lane_num = parseInt(rowData[i].lane_num);
+			rowDataBody.lane_num = parseInt(rowData[i].lane_num);
 		}
 		if(rowData[i].vol =="") {
-			rowData2.vol = parseInt("0");
+			rowDataBody.vol = parseInt("0");
 		} else {
-			rowData2.vol = parseInt(rowData[i].vol);
+			rowDataBody.vol = parseInt(rowData[i].vol);
 		}
-		rowDataArray.push(rowData2);
+		rowDataArray.push(rowDataBody);
+		rowDataFin.head = rowDataHead;
+		rowDataFin.body = rowDataBody;
+		var OPT = {
+				headers: {
+					"Content-Type": "application/json"
+				}
+				, url : "http://cloud.rosesystems.kr:9200/tmp_traffic/doc"
+				, body : JSON.stringify(rowDataFin)
+			};
+		request.post(OPT, function(npErr, npRes, npBody) {
+			console.log(npBody);
+		});
 	}
 	
 	var rowData3 = JSON.stringify(rowDataArray);
@@ -51,8 +71,8 @@ router.get("/", function(req, res, next) {
 			console.log(getErr);
 			res.status(500).send();
 		} else {
-//			setArray(getRs);
-			console.log(setArray(getRs));
+			setArray(getRs);
+//			console.log(setArray(getRs));
 			cFunc.writeXmlToJson("traffic", "traffic_"+date+"_"+time, getRs, function(writeErr, writeRs) {
 				if( writeErr ) {
 					console.log(writeErr);
