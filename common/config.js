@@ -14,4 +14,8 @@ module.exports = {
       key : "j%2FJEhMLcNed%2Be%2FNrouvABdyi%2B7xNmrvmm8gJh14R1EItc4ahLDZ5S%2FMv4AzERf8bgxImWinbd%2F4sf3evR97VJA%3D%3D"
       , url : "http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid"
    }
+   , calendar : {
+	   key : "CfarbO7U8Llk%2FwVwC%2BEtPg3TQwo7Pd4dYqZe%2BdTqhOeuNQw%2ByD2RjokqDFFP5NFA02fVL6u69VvHWDzUXQbNfQ%3D%3D"
+		, url : "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService"
+   }
 };
