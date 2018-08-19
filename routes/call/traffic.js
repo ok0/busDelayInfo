@@ -49,7 +49,7 @@ var setArray = function(body) {
 				, url : "http://cloud.rosesystems.kr:9200/tmp_traffic/doc/"+rowDataBody.ymd+rowDataBody.hh+rowDataBody.io_type+rowDataBody.lane_num
 				, body : JSON.stringify(rowDataFin)
 			};
-		request.post(OPT, function(npErr, npRes, npBody) {
+		request.put(OPT, function(npErr, npRes, npBody) {
 			console.log(npBody);
 		});
 	}
