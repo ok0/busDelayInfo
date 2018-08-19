@@ -53,6 +53,10 @@ var setArray = function(_type, _data) {
 		}
 	}
 	
+	rs.year = parseInt(rs.year);
+	rs.month = parseInt(rs.month);
+	rs.day = parseInt(rs.day);
+	
 	return rs;
 }
 
@@ -135,7 +139,10 @@ router.get("/holiday", function(req, res, next) {
 					doneCallback(getErr);
 				} else {
 					console.log(_func);
-					if( getRs.response.body[0].items[0].item.length > 0 ) {
+					if(
+						getRs.response.body[0].items[0].item
+						&& getRs.response.body[0].items[0].item.length > 0
+					) {
 						async.eachOfSeries(
 							getRs.response.body[0].items[0].item
 							, function(_row, _idx2, doneCallback2) {
