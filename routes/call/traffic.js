@@ -9,26 +9,50 @@ const CONFIG = require("../../common/config");
 // 2. parseInt(), parseFloat()
 var setArray = function(body) {
 	console.log("traffic setArray start");
+	if(body == null) {
+		console.log("file is null");
+		return ;
+	}
 	var rowDataRESULT = body.VolInfo.RESULT[0] ;
 	var rowData = body.VolInfo.row ;
 	var rowDataArray = new Array();
-	
+	if(!(rowDataRESULT.CODE[0]=="INFO-000")) {
+		console.log(rowDataRESULT.CODE[0]+" | "+rowDataRESULT.MESSAGE[0]);
+		var rowDataFin = new Object();
+		var rowDataHead = new Object();
+		rowDataHead.CODE = rowDataRESULT.CODE[0];
+		rowDataHead.MESSAGE = rowDataRESULT.MESSAGE[0];
+		rowDataFin.head = rowDataHead;
+		rowDataFin.body = "";
+		var url1 = 'http://cloud.rosesystems.kr:9200/tmp_traffic/doc';
+		var OPT = {
+				headers: {
+					"Content-Type": "application/json"
+				}
+				, url : url1
+				, body : JSON.stringify(rowDataFin)
+			};
+		request.post(OPT, function(npErr, npRes, npBody) {
+			console.log(npBody);
+		});
+		return ;
+	}
 	for (var i = 0 ; i < rowData.length ; i++) {
 		var rowDataFin = new Object();
 		var rowDataBody = new Object();
 		var rowDataHead = new Object();
 		
-		rowDataHead.CODE = rowDataRESULT.CODE;
-		rowDataHead.MESSAGE = rowDataRESULT.MESSAGE;
+		rowDataHead.CODE = rowDataRESULT.CODE[0];
+		rowDataHead.MESSAGE = rowDataRESULT.MESSAGE[0];
 		
-		rowDataBody.spot_num = rowData[i].spot_num;
-		rowDataBody.ymd = rowData[i].ymd;
+		rowDataBody.spot_num = rowData[i].spot_num[0];
+		rowDataBody.ymd = rowData[i].ymd[0];
 		if(rowData[i].hh =="") {
 			rowDataBody.hh = parseInt("0");
 		} else {
 			rowDataBody.hh = parseInt(rowData[i].hh);
 		}
-		rowDataBody.io_type = rowData[i].io_type;
+		rowDataBody.io_type = rowData[i].io_type[0];
 		if(rowData[i].lane_num =="") {
 			rowDataBody.lane_num = parseInt("0");
 		} else {

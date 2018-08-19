@@ -9,19 +9,43 @@ var request = require("request");
 // 2. parseInt(), parseFloat()
 var setArray = function(body) {
 	console.log("weather setArray start");
+	if(body == null) {
+		console.log("file is null");
+		return ;
+	}
 	var rowDataRESULT = body.RealtimeWeatherStation.RESULT[0] ;
 	var rowData = body.RealtimeWeatherStation.row ;
 	var rowDataArray = new Array();
-	
+	if(!(rowDataRESULT.CODE[0]=="INFO-000")) {
+		console.log(rowDataRESULT.CODE[0]+" | "+rowDataRESULT.MESSAGE[0]);
+		var rowDataFin = new Object();
+		var rowDataHead = new Object();
+		rowDataHead.CODE = rowDataRESULT.CODE[0];
+		rowDataHead.MESSAGE = rowDataRESULT.MESSAGE[0];
+		rowDataFin.head = rowDataHead;
+		rowDataFin.body = "";
+		var url1 = 'http://cloud.rosesystems.kr:9200/tmp_weather/doc';
+		var OPT = {
+				headers: {
+					"Content-Type": "application/json"
+				}
+				, url : url1
+				, body : JSON.stringify(rowDataFin)
+			};
+		request.post(OPT, function(npErr, npRes, npBody) {
+			console.log(npBody);
+		});
+		return ;
+	}
 	for (var i = 0 ; i < rowData.length ; i++) {
 		var rowDataFin = new Object();
 		var rowDataBody = new Object();
 		var rowDataHead = new Object();
-		rowDataHead.CODE = rowDataRESULT.CODE;
-		rowDataHead.MESSAGE = rowDataRESULT.MESSAGE;
-		rowDataBody.SAWS_OBS_TM = rowData[i].SAWS_OBS_TM;
-		rowDataBody.STN_NM = rowData[i].STN_NM;
-		rowDataBody.STN_ID = rowData[i].STN_ID;
+		rowDataHead.CODE = rowDataRESULT.CODE[0];
+		rowDataHead.MESSAGE = rowDataRESULT.MESSAGE[0];
+		rowDataBody.SAWS_OBS_TM = rowData[i].SAWS_OBS_TM[0];
+		rowDataBody.STN_NM = rowData[i].STN_NM[0];
+		rowDataBody.STN_ID = rowData[i].STN_ID[0];
 		if(rowData[i].SAWS_TA_AVG =="") {
 			rowDataBody.SAWS_TA_AVG = parseFloat("0.0");
 		} else {
@@ -32,8 +56,8 @@ var setArray = function(body) {
 		} else {
 			rowDataBody.SAWS_HD = parseFloat(rowData[i].SAWS_HD);
 		}
-		rowDataBody.CODE = rowData[i].CODE;
-		rowDataBody.NAME = rowData[i].NAME;
+		rowDataBody.CODE = rowData[i].CODE[0];
+		rowDataBody.NAME = rowData[i].NAME[0];
 		if(rowData[i].SAWS_WS_AVG =="") {
 			rowDataBody.SAWS_WS_AVG = parseFloat("0.0");
 		} else {
