@@ -46,7 +46,7 @@ var setArray = function(body) {
 				headers: {
 					"Content-Type": "application/json"
 				}
-				, url : "http://cloud.rosesystems.kr:9200/tmp_traffic/doc"
+				, url : "http://cloud.rosesystems.kr:9200/tmp_traffic/doc/"+rowDataBody.ymd+rowDataBody.hh+rowDataBody.io_type+rowDataBody.lane_num
 				, body : JSON.stringify(rowDataFin)
 			};
 		request.post(OPT, function(npErr, npRes, npBody) {
