@@ -22,7 +22,7 @@ var setArray = function(body) {
 		if(mm.length == 1){
 			mm = "0"+mm;
 		}else{
-			mm = mm;
+			mm = mm; 
 		}
 		dd = date.getDate();
 		if(dd.length == 1){
