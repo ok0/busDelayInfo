@@ -9,7 +9,7 @@ var setArray = function(body) {
 	console.log("station setArray start");
 	var rowData = body.ServiceResult;
 	var rowDataArray = new Array();
-	var rowDataHeader = rowData.msgHeader[0];
+	var rowDataHeader = rowData.msgHeader[0]; 
 	var date = new Date();
 	var yyyy, mm, dd, hours, minutes, seconds;
 
