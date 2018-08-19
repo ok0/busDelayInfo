@@ -5,7 +5,7 @@ var cFunc = require("../../common/func");
 const CONFIG = require("../../common/config");
 var request = require("request");
 
-var setArray = function(body) {
+var setArray = function(body) { 
 	console.log("station setArray start");
 	var rowData = body.ServiceResult;
 	var rowDataArray = new Array();
